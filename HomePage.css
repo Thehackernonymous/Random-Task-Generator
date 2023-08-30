@@ -62,6 +62,16 @@ body {
     background-color: #f7f7f7;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   }
+
+  input[type=text], select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
   
   button {
     padding: 10px 20px;
