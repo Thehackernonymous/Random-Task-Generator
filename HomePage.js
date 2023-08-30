@@ -32,6 +32,22 @@ addTaskBtn.addEventListener("click", () => {
   }
 });
 
+var input = document.getElementById("employeeInput");
+input.addEventListener("keypress", function(event) {
+  if (event.key === "Enter") {
+    event.preventDefault();
+    document.getElementById("addEmployeeBtn").click();
+  }
+});
+
+var input = document.getElementById("taskInput");
+input.addEventListener("keypress", function(event) {
+  if (event.key === "Enter") {
+    event.preventDefault();
+    document.getElementById("addTaskBtn").click();
+  }
+});
+
 // Generate Task button
 generateTaskBtn.addEventListener("click", () => {
     if (tasks.length === 0 || employees.length === 0) {
