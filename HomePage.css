@@ -10,7 +10,7 @@ body {
   .header {
     background-color: white;
     color: black;
-    padding: 20px;
+    padding: 1px;
     display: flex;
     flex-direction: column; 
     justify-content: center; 
@@ -20,6 +20,37 @@ body {
     width: 100%;
     z-index: 1000;
   }
+
+ .line {
+    border-bottom: 2px solid black;
+    margin-top: 5px;
+    position: fixed;
+    width: 90%;
+    left: 5%;
+    top: 78px; 
+    z-index: 900;
+}
+
+  footer {
+    display: flex;
+    justify-content: center;
+    padding: 5px;
+    background-color: white;
+    color: black;
+    position: fixed;
+    bottom: 0;
+
+  }
+
+  .line1 {
+    border-bottom: 2px solid black;
+    margin-top: 5px;
+    position: fixed;
+    width: 90%;
+    bottom: 60px; 
+    left: 5%; 
+    z-index: 900;
+}
   
   .container {
     max-width: 400px;
