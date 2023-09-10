@@ -97,6 +97,11 @@ body {
     padding: 10px 15px;
     border-radius: 5px;
     cursor: pointer;
+    transition: all ease 0.2s;
+  }
+
+  button:active {
+      scale: 0.9;
   }
   
   ul {
