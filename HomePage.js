@@ -8,6 +8,7 @@ const taskList = document.getElementById("taskList");
 
 const generateTaskBtn = document.getElementById("generateTaskBtn");
 const randomTaskDisplay = document.getElementById("randomTask");
+const randomList = document.getElementById("randomList");
 
 const employees = [];
 const tasks = [];
@@ -22,6 +23,14 @@ addEmployeeBtn.addEventListener("click", () => {
   }
 });
 
+var input = document.getElementById("employeeInput");
+input.addEventListener("keypress", function(event) {
+  if (event.key === "Enter") {
+    event.preventDefault();
+    document.getElementById("addEmployeeBtn").click();
+  }
+});
+
 // Add Task button
 addTaskBtn.addEventListener("click", () => {
   const task = taskInput.value.trim();                                                                  
@@ -29,14 +38,6 @@ addTaskBtn.addEventListener("click", () => {
     tasks.push(task);
     updateTaskList();
     taskInput.value = "";
-  }
-});
-
-var input = document.getElementById("employeeInput");
-input.addEventListener("keypress", function(event) {
-  if (event.key === "Enter") {
-    event.preventDefault();
-    document.getElementById("addEmployeeBtn").click();
   }
 });
 
@@ -48,30 +49,39 @@ input.addEventListener("keypress", function(event) {
   }
 });
 
-// Generate Task button
+// generate task button
 generateTaskBtn.addEventListener("click", () => {
-    if (tasks.length === 0 || employees.length === 0) {
-      randomTaskDisplay.textContent = "No tasks or employees available.";
-      return;
-    }
-  
-    const randomTaskIndex = Math.floor(Math.random() * tasks.length);
-    const randomTask = tasks[randomTaskIndex];
-    tasks.splice(randomTaskIndex, 1);
-  
-    const randomEmployeeIndex = Math.floor(Math.random() * employees.length);
-    const randomEmployee = employees[randomEmployeeIndex];
-    employees.splice(randomEmployeeIndex, 1);
-  
-    updateTaskList();
-    updateEmployeeList();
-  
-    randomTaskDisplay.textContent = `${randomEmployee} should do: ${randomTask}`;
-  });
-  
+  if (tasks.length === 0 || employees.length === 0) {
+    randomTaskDisplay.textContent = "No tasks or employees available.";
+    return;
+  }
 
-// update employee list
+  let counter = parseInt(localStorage.getItem("counter")) || 1;
+
+  const randomTaskIndex = Math.floor(Math.random() * tasks.length);
+  const randomTask = tasks[randomTaskIndex];
+  tasks.splice(randomTaskIndex, 1);
+
+  const randomEmployeeIndex = Math.floor(Math.random() * employees.length);
+  const randomEmployee = employees[randomEmployeeIndex];
+  employees.splice(randomEmployeeIndex, 1);
+
+  const assignedTaskText = `${randomEmployee} should do: ${randomTask}`;
+
+  const listItem = document.createElement("li");
+  listItem.textContent = assignedTaskText;
+  randomTaskDisplay.appendChild(listItem);
+  
+  counter = (counter % 100) + 1; 
+  localStorage.setItem("counter", counter.toString());
+
+ updateEmployeeList();
+ updateTaskList();
+});
+
+// Update employee list
 function updateEmployeeList() {
+  const employeeList = document.getElementById("employeeList");
   employeeList.innerHTML = "";
   employees.forEach(employee => {
     const listItem = document.createElement("li");
@@ -80,8 +90,9 @@ function updateEmployeeList() {
   });
 }
 
-// update task list
+// // Update task list
 function updateTaskList() {
+  const taskList = document.getElementById("taskList");
   taskList.innerHTML = "";
   tasks.forEach(task => {
     const listItem = document.createElement("li");
@@ -89,11 +100,3 @@ function updateTaskList() {
     taskList.appendChild(listItem);
   });
 }
-
-
-
-  
-
-
-
-
